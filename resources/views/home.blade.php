@@ -11,8 +11,9 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <!-- Styles -->
-    <style>
+    {{-- <style>
         /* ! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com */
         *,
         ::after,
@@ -827,7 +828,7 @@
                 padding: 2rem
             }
         }
-    </style>
+    </style> --}}
      @livewireStyles
 </head>
 
@@ -838,11 +839,11 @@
     @livewireScripts
 
     <script>
-        window.onscroll = function(ev) {
-            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-                window.Livewire.dispatch('load-more');
-            }
-        };
+        // window.onscroll = function(ev) {
+        //     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        //         window.Livewire.dispatch('load-more');
+        //     }
+        // };
         document.addEventListener('userStore', (e) => {
             console.log(e);
         });
