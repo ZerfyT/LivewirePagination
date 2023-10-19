@@ -836,17 +836,6 @@
         @livewire('users-list')
     </div>
     @livewireScripts
-
-    <script>
-        window.onscroll = function(ev) {
-            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-                window.Livewire.dispatch('load-more');
-            }
-        };
-        document.addEventListener('userStore', (e) => {
-            console.log(e);
-        });
-    </script>
 </body>
 
 </html>
