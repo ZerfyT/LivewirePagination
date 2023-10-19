@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\User;
 use Illuminate\Pagination\Cursor;
 use Illuminate\Support\Collection;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class UsersList extends Component
@@ -20,8 +21,14 @@ class UsersList extends Component
         $this->loadUsers();
     }
     protected $listeners = [
-        'load-more' => 'loadMore'
+        'load-more' => 'loadMore',
     ];
+
+    #[On('reload-homepage')]
+    public function reloadHomepage()
+    {
+        dd('reload');
+    }
 
     public function loadUsers()
     {
@@ -38,14 +45,7 @@ class UsersList extends Component
         $this->dispatch('userStore', $users, $this->nextCursor, $this->hasMorePages);
     }
 
-    public function deleteUser($id)
-    {
-        // Delete the user
-        User::find($id)->delete();
 
-        // Update the list of users
-        $this->emit('userStore', User::latest()->paginate($this->limitPerPage));
-    }
 
 
     public function render()

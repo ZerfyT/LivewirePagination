@@ -20,3 +20,6 @@ Route::get('/', function () {
 Route::get('/load-more-users', function () {
     return view('home');
 });
+// Route::post('/livewire/message/{update}', function ($name) {
+//     // Handle the dispatched event
+//   })->name('livewire.message.update');
