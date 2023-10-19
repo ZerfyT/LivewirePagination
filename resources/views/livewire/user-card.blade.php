@@ -1,4 +1,4 @@
-<div class="flex justify-center items-center h-screen">
+<div class="flex justify-center items-center h-screen" @if ($loop->last) id="last_record" @endif>
     <div class="card w-full max-w-sm">
         <div class="card-body">
             <div class="flex flex-col items-center">

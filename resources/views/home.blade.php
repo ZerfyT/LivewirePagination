@@ -837,12 +837,17 @@
     </div>
     @livewireScripts
 
-    <script>
+    {{-- <script>
         window.onscroll = function(ev) {
             if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
                 window.Livewire.dispatch('load-more');
             }
         };
+        document.addEventListener('userStore', (e) => {
+            console.log(e);
+        });
+    </script> --}}
+    <script>
         document.addEventListener('userStore', (e) => {
             console.log(e);
         });

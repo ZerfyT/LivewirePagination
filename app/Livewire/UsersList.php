@@ -7,7 +7,8 @@ use Livewire\Component;
 
 class UsersList extends Component
 {
-    public $limitPerPage = 10;
+    public $totalRecords;
+    public $loadAmount = 10;
 
     protected $listeners = [
         'load-more' => 'loadMore'
@@ -15,22 +16,23 @@ class UsersList extends Component
 
     public function loadMore()
     {
-        $this->limitPerPage = $this->limitPerPage + 20;
+        $this->loadAmount += 10;
     }
 
     public function deleteUser($id)
     {
         // Delete the user
-        User::find($id)->delete();
+        // User::find($id)->delete();
+        $this->totalRecords = User::count();
 
         // Update the list of users
-        $this->emit('userStore', User::latest()->paginate($this->limitPerPage));
+        $this->dispatch('userStore', User::latest()->paginate($this->limitPerPage));
     }
 
 
     public function render()
     {
-        $users = User::latest()->paginate($this->limitPerPage);
+        $users = User::latest()->limit($this->loadAmount)->get();
         $this->dispatch('userStore', $users);
 
         return view('livewire.users-list', ['users' => $users]);
