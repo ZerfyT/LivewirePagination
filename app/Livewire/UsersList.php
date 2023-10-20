@@ -22,6 +22,7 @@ class UsersList extends Component
     }
     protected $listeners = [
         'load-more' => 'loadMore',
+        'reload-homepage' => 'reloadHomepage',
     ];
 
     #[On('reload-homepage')]

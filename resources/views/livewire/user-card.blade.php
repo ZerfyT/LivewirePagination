@@ -25,8 +25,11 @@
                             <{{ $user->password }} /span>
                     </li>
                 </ul>
-                <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 hover:shadow-lg"
-                    wire:click.prevent="deleteUser">Delete</button>
+                <form wire:submit.prevent="deleteUser({{ $user->id }})">
+                    @csrf
+                    <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 hover:shadow-lg"
+                        type="submit">Delete</button>
+                </form>
             </div>
         </div>
     </div>
