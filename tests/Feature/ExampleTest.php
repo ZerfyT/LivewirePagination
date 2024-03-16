@@ -16,4 +16,11 @@ class ExampleTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function test_route_pagination_home(): void
+    {
+        $response = $this->get('/load-more-users');
+        $response->assertStatus(200);
+        $this->visit('/load-more-users');
+    }
 }

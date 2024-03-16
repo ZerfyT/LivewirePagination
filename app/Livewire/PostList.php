@@ -5,13 +5,12 @@ namespace App\Livewire;
 use App\Models\User;
 use Illuminate\Pagination\Cursor;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Redis;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
-class UsersList extends Component
+class PostList extends Component
 {
-    public $limitPerPage = 10;
+    public $limitPerPage = 5;
     public $users;
     public $nextCursor;
     public $hasMorePages;
@@ -25,21 +24,14 @@ class UsersList extends Component
     #[On('reload-homepage')]
     public function reloadHomepage()
     {
-        // dd('reload 2');
-        $this->render();
+        dd('reload homepage');
     }
 
-    public function updateUsersCollection()
+    #[On('home-updated')]
+    public function catchHomeUpdated()
     {
-        if($users = Redis::get('users')) {
-            $users = json_decode($users, false);
-        }
-        else {
-            $users = User::cursorPaginate($this->limitPerPage, ['*'], 'cursor', Cursor::fromEncoded($this->nextCursor));
-            $this->users->push(...$users->items());
-            Redis::set('users', json_encode($this->users, JSON_FORCE_OBJECT));
-        }
-        return $users;
+        // dd('home updated');
+        dd('reload');
     }
 
     public function loadUsers()
@@ -47,21 +39,17 @@ class UsersList extends Component
         if ($this->hasMorePages !== null  && ! $this->hasMorePages) {
             return;
         }
-        $users = $this->updateUsersCollection();
-        // dd($users);
+        $users = User::cursorPaginate($this->limitPerPage, ['*'], 'cursor', Cursor::fromEncoded($this->nextCursor));
 
+        $this->users->push(...$users->items());
 
         if ($this->hasMorePages = $users->hasMorePages()) {
             $this->nextCursor = $users->nextCursor()->encode();
         }
         $this->dispatch('userStore', $users, $this->nextCursor, $this->hasMorePages);
     }
-
     public function render()
     {
-        // $users = User::latest()->paginate($this->limitPerPage);
-        // $this->dispatch('userStore', $users);
-
-        return view('livewire.users-list');
+        return view('livewire.post-list');
     }
 }

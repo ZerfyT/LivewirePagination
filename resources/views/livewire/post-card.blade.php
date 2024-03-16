@@ -25,8 +25,10 @@
                             <{{ $user->password }} /span>
                     </li>
                 </ul>
-                <div wire:click.prevent="deleteUser({{ $user->id }})">
-                    <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 hover:shadow-lg"
+                <div>
+                    <button wire:click="deleteUser" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 hover:shadow-lg"
+                        type="button">Delete Alpine</button>
+                        <button wire:click.prevent="deleteDispatch" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 hover:shadow-lg"
                         type="button">Delete</button>
                 </div>
             </div>
